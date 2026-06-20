@@ -39,8 +39,8 @@ const data=[
   require("../assets/images/product2_2.png")
 
   ],
-  title:"Pearl Mist",
-  price:89.90,
+  title:"Moonveil ",
+  price:80.90,
  oldPrice:190,
   //  discount:null,
   availability:"In Stock",
@@ -70,8 +70,8 @@ const data=[
   require("../assets/images/product3_3.png")
 
   ],
-  title:"Pearl Mist",
-  price:89.90,
+  title:"Celestial Bloom",
+  price:189.90,
  oldPrice:null,
   //  discount:null,
   availability:"Available on Backorder",
@@ -102,8 +102,8 @@ const data=[
   require("../assets/images/product4_4.png")
 
   ],
-  title:"Pearl Mist",
-  price:89.90,
+  title:"Silver Dew",
+  price:87.90,
  oldPrice:null,
   // discount:null,
   availability:"Available on Backorder",
@@ -133,8 +133,8 @@ const data=[
          require("../assets/images/product5_5.png")
 
   ],
-  title:"Pearl Mist",
-  price:89.90,
+  title:"Opaline Dream",
+  price:79.90,
  oldPrice:null,
    //discount:null,
   availability:"In Stock",
@@ -164,8 +164,8 @@ const data=[
   require("../assets/images/product6_6.png")
 
   ],
-  title:"Pearl Mist",
-  price:89.90,
+  title:"Crystal Veil",
+  price:99.90,
   oldPrice:110.00,
    //discount:"21% Off",
   availability:"In Stock",
@@ -194,7 +194,7 @@ const data=[
   require("../assets/images/product11_11.png")
 
   ],
-  title:"Pearl Mist",
+  title:"Frosted Pearl",
    price:89.90,
  oldPrice:null,
  //  discount:null,
@@ -225,8 +225,8 @@ const data=[
   require("../assets/images/product14_14.png")
 
   ],
-  title:"Pearl Mist",
-   price:89.90,
+  title:"Swanlight",
+   price:100.90,
  oldPrice:null,
    //discount:null,
   availability:"Out of Stock",
@@ -256,8 +256,8 @@ const data=[
   require("../assets/images/product9_9.png")
 
   ],
-  title:"Pearl Mist",
- price:89.90,
+  title:"Dove Serenity",
+ price:99.90,
   oldPrice:110.00,
  //  discount:"21% Off",
   availability:"Out of Stock",
@@ -287,7 +287,7 @@ const data=[
   require("../assets/images/product10_10.png")
 
   ],
-  title:"Pearl Mist",
+  title:"Starborn Silk",
   price:89.90,
   oldPrice:110.00,
  //  discount:"21% Off",
@@ -317,8 +317,8 @@ const data=[
   require("../assets/images/product11_11.png")
 
   ],
-  title:"Pearl Mist",
-   price:89.90,
+  title:"Ivory Mist",
+   price:98.90,
   oldPrice:110.00,
   // discount:"21% Off",
   availability:"Available on Backorder",

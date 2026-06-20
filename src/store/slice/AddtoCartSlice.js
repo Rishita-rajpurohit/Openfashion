@@ -8,15 +8,25 @@ const AddtoCartSlice = createSlice({
     reducers:{
 
     addintocart:(state,action)=>{
+        const itemexist = state.addtocart.find(
+            item=> item.id === action.payload.id
+        )
 
-    const itemexist  = state.addtocart.find(
-        item=> item.id === action.payload.id
-    )
+        const incomingQuantity = action.payload.quantity ?? 1;
 
-    if(!itemexist)
-    {
-        state.addtocart.push(action.payload)
-    }
+        if(itemexist){
+            const maxStock = itemexist.stockunit ?? Number.MAX_SAFE_INTEGER;
+            itemexist.quantity = Math.min(
+                itemexist.quantity + incomingQuantity,
+                maxStock
+            );
+        }
+        else{
+            state.addtocart.push({
+                ...action.payload,
+                quantity: incomingQuantity,
+            })
+        }
 
     },
 

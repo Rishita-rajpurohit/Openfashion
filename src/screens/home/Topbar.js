@@ -14,7 +14,7 @@ const Topbar = () => {
 </TouchableOpacity>
 
 <View>
-   <Text style={styles.logo}>Nomad</Text>
+   <Text style={styles.logo}>Open Fashion</Text>
 </View>
 
 <TouchableOpacity>

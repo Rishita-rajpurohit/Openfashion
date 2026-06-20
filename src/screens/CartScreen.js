@@ -4,6 +4,7 @@ import Topbar from './Cart/Topbar'
 import colors from './Colors'
 import Card from './Cart/Card'
 import ApplyCoupon from './Cart/ApplyCoupon'
+import Totalprice from './Cart/Totalprice'
 
 const CartScreen = () => {
   return (
@@ -16,6 +17,10 @@ const CartScreen = () => {
 
 {/* <ApplyCoupon/> */}
      </ScrollView>
+
+
+<Totalprice/>
+
     </View>
   )
 }

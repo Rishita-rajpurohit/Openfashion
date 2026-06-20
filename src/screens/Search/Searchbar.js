@@ -5,16 +5,16 @@ import colors from '../Colors'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
-const Searchbar = () => {
+const Searchbar = ({Search, setSearch}) => {
   return (
     <View style={styles.Searchbarconatiner}>
 <Ionicons name="search" size={24} color={colors.homeiconbackgroundcolor} />
 <View style={{width:260, height:42, }}>
 <TextInput placeholder='SEARCH'placeholderTextColor={colors.textcolor} style={{fontSize:16, ...Fonts.Titlefont,
   
-}} ></TextInput></View>
+}}  value={Search} onChangeText={setSearch}></TextInput></View>
 
-<TouchableOpacity>
+<TouchableOpacity onPress={()=>setSearch('')}>
      <Ionicons name="close-circle" size={24} color="black" />
      </TouchableOpacity>
     </View>

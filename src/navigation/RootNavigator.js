@@ -10,6 +10,9 @@ import SearchScreen from '../screens/SearchScreen';
 import WishListScreen from '../screens/WishListScreen';
 import Login1 from '../screens/Login1';
 import Signup from '../screens/Signup';
+import CheckoutScreen from '../screens/CkeckoutScreen';
+
+
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator();
 
@@ -25,6 +28,7 @@ const RootNavigator = () => {
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="Login1" component={Login1} />
+      <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
 
       <Stack.Screen name="MainTabNavigation" component={MainTabNavigation} />
     </Stack.Navigator>

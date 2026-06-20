@@ -257,22 +257,22 @@ product.availability === "In Stock" ? colors.instock :product.availability === "
 
 {/* add to cart button */}
 <TouchableOpacity style={styles.Addcartbtn} onPress={()=>{
+  const itemexist = cart.find(
+    item=> item.id === product.id
+  );
 
-const itemexist = cart.find(
-  item=> item.id === product.id
-)
+  if(itemexist && itemexist.quantity >= product.stockunit){
+    Alert.alert('Maximum stock reached');
+    return;
+  }
 
-if(itemexist){
-  Alert.alert("Item is already added into the cart")
-  return;
-}
-dispatch(addintocart({
-  ...product,
-  quantity: quantity,
-  selectedsize:selectedsize,
-}))
+  dispatch(addintocart({
+    ...product,
+    quantity: quantity,
+    selectedsize: selectedsize,
+  }));
 
-Alert.alert("Item added to cart")
+  Alert.alert(itemexist ? 'Cart quantity updated' : 'Item added to cart');
 
 }}>
   <Text style={{color:colors.textcolor, ...Fonts.Titlefont, fontSize:18}}>Add to Cart</Text>

@@ -98,10 +98,12 @@ import React from 'react';
 
 import {
   View,
+  Text,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -128,6 +130,11 @@ const { width } = Dimensions.get('window');
 /* ================= CUSTOM TAB BAR ================= */
 
 function CustomTabBar({ state, navigation }) {
+  const cart = useSelector(state => state.addtocart.addtocart);
+  const totalCartQuantity = cart.reduce(
+    (sum, item) => sum + (item.quantity ?? 0),
+    0,
+  );
 
   const center = width / 2;
 
@@ -250,25 +257,30 @@ function CustomTabBar({ state, navigation }) {
           /* ================= NORMAL TABS ================= */
 
           return (
-
-            <TouchableOpacity
-              key={route.key}
-              onPress={onPress}
-              style={styles.normalTab}
-              activeOpacity={0.7}
-            >
-
-              <FontAwesome
-                name={iconName}
-                size={24}
-                color={
-                  focused
-                    ? colors.iconactiveclor
-                    : colors.iconInactivecolor
-                }
-              />
-
-            </TouchableOpacity>
+            <View style={styles.iconWrapper} key={route.key}>
+              <TouchableOpacity
+                onPress={onPress}
+                style={styles.iconButton}
+                activeOpacity={0.7}
+              >
+                <FontAwesome
+                  name={iconName}
+                  size={24}
+                  color={
+                    focused
+                      ? colors.iconactiveclor
+                      : colors.iconInactivecolor
+                  }
+                />
+              </TouchableOpacity>
+              {route.name === 'CartStack' && totalCartQuantity > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>
+                    {totalCartQuantity}
+                  </Text>
+                </View>
+              )}
+            </View>
           );
         })}
       </View>
@@ -374,6 +386,36 @@ const styles = StyleSheet.create({
   normalTab: {
     flex: 1,
     alignItems: 'center',
+  },
+
+  iconWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  iconButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  badge: {
+    position: 'absolute',
+    top: 6,
+    right: 24,
+    minWidth: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#E53935',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 5,
+  },
+
+  badgeText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: '700',
   },
 
   /* CENTER HOME BUTTON WITH SHADOW */

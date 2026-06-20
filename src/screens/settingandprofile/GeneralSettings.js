@@ -11,17 +11,22 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Feather from 'react-native-vector-icons/Feather'
 import RateApp_Modal from '../modals/RateApp_Modal'
 import { useNavigation } from '@react-navigation/native'
-
+import {useTranslation} from 'react-i18next';
+import i18n from '../../i18n'
+import Language_Modal from '../modals/Language_Modal';
 
 const GeneralSettings = () => {
 
+    const {t}= useTranslation();
+
     const navigation = useNavigation();
+    const [openLanguageModal,setOpenLanguageModal] =useState(false);
 
     const [openRateModal, setopenRateModal] = useState(false);
   return (
     <View style={styles.maincontainer}>
      
-     <Text style={{...Fonts.Titlefont, color:colors.textcolor, fontSize:22, marginBottom:15}}>GENERAL SETTINGS</Text>
+     <Text style={{...Fonts.Titlefont, color:colors.textcolor, fontSize:22, marginBottom:15}}>{t('generalSettings')}</Text>
      
 
      <View style={styles.btns}>
@@ -62,7 +67,12 @@ const GeneralSettings = () => {
 
 {/* Languages */}
 
-<TouchableOpacity style={styles.btnconatiner}>
+<TouchableOpacity
+  style={styles.btnconatiner}
+  onPress={() =>
+    setOpenLanguageModal(true)
+  }
+>
 
 <View style={{flexDirection:"row", gap:23, alignItems:"center"}}>
     {/* <Image  source={require('../../assets/images/log_outicon.png')}/> */}
@@ -73,7 +83,9 @@ const GeneralSettings = () => {
 </View>
 
 <View style={{flexDirection:"row", gap:16, alignItems:"center"}}>
-    <Text  style={{...Fonts.Titlefont, color:colors.textcolor, fontSize:14}}>English</Text>
+    <Text  style={{...Fonts.Titlefont, color:colors.textcolor, fontSize:14}}> {i18n.language === 'fr'
+    ? 'Français'
+    : 'English'}</Text>
 <FontAwesome name="angle-right" size={24} color={colors.homeiconbackgroundcolor} />
 
 </View>
@@ -209,7 +221,12 @@ const GeneralSettings = () => {
   visible={openRateModal}
   onClose={() => setopenRateModal(false)}
 />
-
+<Language_Modal
+  visible={openLanguageModal}
+  onClose={() =>
+    setOpenLanguageModal(false)
+  }
+/>
 
 
 

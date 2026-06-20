@@ -81,19 +81,22 @@ const discount = item.oldPrice ? Math.round(
 {/* add to cart button */}
 <TouchableOpacity style={styles.addcarticon} onPress={
   ()=>{
-    const itemexist = cart.fint(i => i.id === item.id)
-    if(itemexist){
-      Alert.alert("item already in cart")
-    }
-    dispatch(
-      addintocart(
-        {
-          ...item,
-          quantity:1,
-        }
-      )
-    )
-    Alert.alert("item added to cart")
+   const itemexist = cart.find(i => i.id === item.id)
+
+if(itemexist){
+  Alert.alert("item already in cart")
+  return;
+}
+
+dispatch(
+  addintocart({
+    ...item,
+    quantity:1,
+    selectedSize:item.sizes[0],
+  })
+)
+
+Alert.alert("item added to cart")
   }
 }>
 <Image source={require('../assets/images/addtocarticon.png')}></Image>

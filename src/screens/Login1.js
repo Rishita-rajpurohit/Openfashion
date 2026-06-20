@@ -28,7 +28,7 @@ const Login1 = () => {
 
   return (
     <View style={styles.maincontainer}>
-      <TouchableOpacity onPress={navigation.goBack}>
+      <TouchableOpacity onPress={navigation.goBack()}>
         <MaterialIcons name="keyboard-backspace" size={26} color="#5F6E6B" />
       </TouchableOpacity>
 

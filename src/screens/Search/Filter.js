@@ -4,7 +4,7 @@ import Fonts from '../Fonts'
 import colors from '../Colors'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Entypo from 'react-native-vector-icons/Entypo'
-const Filter = () => {
+const Filter = ({onOpenFilter}) => {
   return (
     <View style={styles.maincontainer}>
       
@@ -14,7 +14,7 @@ const Filter = () => {
    </TouchableOpacity>
 
 
-   <TouchableOpacity style={styles.filetrcontainer}>
+   <TouchableOpacity style={styles.filetrcontainer} onPress={onOpenFilter}>
     <Text style={{...Fonts.Titlefont, color:colors.textcolor, fontSize:14}}>Filter</Text>
 
     <Entypo name="chevron-right"  size={15} color={colors.headingtextcolor} />

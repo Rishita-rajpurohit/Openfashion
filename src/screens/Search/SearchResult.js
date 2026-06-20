@@ -1,22 +1,60 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Alert } from 'react-native'
 import React from 'react'
 import Fonts from '../Fonts'
 import colors from '../Colors'
 import data from '../data'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native'
-const Results = () => {
+import {useSelector,useDispatch } from 'react-redux'
+import {removefromwishlist, addtowislist} from '../../store/slice/WishlistSlice'
+import {addintocart} from '../../store/slice/AddtoCartSlice'
 
+
+const Results = ({Search, sorttype }) => {
+
+  const dispatch = useDispatch();
+  const wishlist = useSelector(
+    state=> state.wishlist.wishlist
+  )
+  const cart = useSelector(
+    state=> state.addtocart.addtocart
+  )
     const navigation = useNavigation();
+
+const SearchedData = data.filter(i=>
+  i.title.toLowerCase().includes(Search.toLowerCase())
+)
+
+let sorteddata = [...SearchedData]
+
+if(sorttype === "lowtohigh")
+{
+  sorteddata.sort((a,b)=>a.price - b.price)
+}
+else if(sorttype === "hightolow")
+{
+  sorteddata.sort((a,b)=>b.price - a.price)
+}
+else if(sorttype === "atoz"){
+  sorteddata.sort((a,b)=> a.title.localeCompare(b.title))
+}
+else if(sorttype === "ztoa"){
+  sorteddata.sort((a,b)=> b.title.localeCompare(a.title))
+}
+
+
+
+
   return (
     <View style={{backgroundColor:"white", flex:1, paddingLeft:15, paddingRight:15 }}>
 <View style={{flexDirection:"row", justifyContent:"space-between",marginTop:24, marginBottom:24}}>
       <Text style={{...Fonts.headingfont, color:colors.headingtextcolor}}>Results</Text>
-      <Text style={{...Fonts.Titlefont, fontSize:14, color:colors.sidesmalltextcolor2}}>8 Items</Text>
+      <Text style={{...Fonts.Titlefont, fontSize:14, color:colors.sidesmalltextcolor2}}>{sorteddata.length} Items</Text>
       </View>
 
 <FlatList
-data={data.slice(0,8)}
+// data={data.slice(0,8)}
+data={sorteddata}
 keyExtractor={(item)=>item.id}
 numColumns={2}
 showsVerticalScrollIndicator={false}
@@ -43,11 +81,34 @@ const discount = item.oldPrice ? Math.round(
      </View>
 )}
 
-<TouchableOpacity style={styles.heartcontainer}>
-  <FontAwesome name="heart-o" size={16} color={colors.inactivewhishlist_Iconcolor} />
+<TouchableOpacity style={styles.heartcontainer} onPress={()=>{
+  const itemexist = wishlist.find(
+    i=> i.id === item.id
+  )
+  if(!itemexist)
+  {
+    dispatch(addtowislist(item))
+  }
+  else{
+    dispatch(removefromwishlist(item.id))
+  }
+}}>
+  <FontAwesome name={wishlist.find(i=> i.id === item.id) ? "heart" : "heart-o"} size={16} color={wishlist.find(i=>i.id === item.id)? colors.activewishlisticoncolor: colors.inactivewhishlist_Iconcolor} />
 </TouchableOpacity>
 
-<TouchableOpacity style={styles.addcarticon}>
+<TouchableOpacity style={styles.addcarticon} onPress={()=>{
+  const itemexist = cart.find(i=>i.id===item.id);
+  if(itemexist && itemexist.quantity >= item.stockunit){
+    Alert.alert('Maximum stock reached');
+    return;
+  }
+
+  dispatch(addintocart({
+    ...item,
+    quantity: 1,
+  }));
+  Alert.alert(itemexist ? 'Product quantity updated in cart' : 'Item added to cart');
+}}>
 <Image source={require('../../assets/images/addtocarticon.png')}></Image>
 </TouchableOpacity>
 
